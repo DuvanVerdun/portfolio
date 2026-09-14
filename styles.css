@@ -7,7 +7,8 @@
   --line: #242424;
   --line-strong: #383838;
   --accent: #ffffff;
-  --max: 1120px;
+  --max: 800px;
+  --wide: 1100px;
 }
 
 * {
@@ -35,14 +36,19 @@ a {
   position: sticky;
   top: 0;
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: 100%;
+  background: color-mix(in srgb, var(--bg) 88%, transparent);
+  backdrop-filter: blur(12px);
+}
+
+.header-inner {
   width: min(calc(100% - 40px), var(--max));
   margin: 0 auto;
   padding: 22px 0;
-  background: color-mix(in srgb, var(--bg) 88%, transparent);
-  backdrop-filter: blur(12px);
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .brand {
@@ -101,9 +107,9 @@ p {
 }
 
 h1 {
-  max-width: 900px;
+  max-width: 780px;
   margin: 14px 0 24px;
-  font-size: clamp(3.2rem, 8vw, 7.5rem);
+  font-size: clamp(3rem, 7vw, 6rem);
   line-height: 0.97;
   letter-spacing: -0.06em;
 }
@@ -252,7 +258,7 @@ p {
   margin-top: 54px;
 }
 
-.story-copy > p {
+.section-heading > p {
   max-width: 650px;
   margin-bottom: 42px;
 }
@@ -281,8 +287,8 @@ p {
 
 .timeline {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 36px;
   margin-top: 70px;
 }
 
@@ -341,6 +347,7 @@ p {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 14px;
+  margin-top: 14px;
 }
 
 .card h3 {
@@ -349,6 +356,7 @@ p {
 
 .subsection {
   margin-top: 70px;
+  padding-bottom: 50px;
 }
 
 .subsection > h3 {
@@ -366,6 +374,10 @@ p {
   gap: 12px;
   padding: 26px 0;
   border-bottom: 1px solid var(--line);
+}
+
+.problem-list article:last-child {
+  border-bottom: 0;
 }
 
 .problem-list article > span {
@@ -386,13 +398,12 @@ code {
 }
 
 .about {
-  display: grid;
-  grid-template-columns: 0.8fr 1.2fr;
+  display: flex;
+  flex-direction: column;
   gap: 60px;
 }
 
 .about-copy {
-  align-self: end;
   margin-bottom: 0;
 }
 
