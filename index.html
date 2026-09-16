@@ -115,7 +115,7 @@
                 <h3>Multi-user product</h3>
                 <p>
                   After using it myself for about a month, I wanted multiple users to be able to use it.
-                  I did not know how to build account systems or store multiple users' data, so instead of
+                  I did not know how to build account systems or store multiple users' data, but instead of
                   learning backend development separately, I learned the concepts I needed and immediately
                   applied them to ExecutionOS.
                 </p>
@@ -127,7 +127,7 @@
               <div>
                 <h3>UI/UX redesign</h3>
                 <p>
-                  Once the app supported multiple users, the core experience did not meet my minimum quality
+                  Once the app supported multiple users, the core experience didn't meet my minimum quality
                   bar. I learned enough Figma, UI design, and prototyping to redesign the screens, then
                   translated those designs directly into the shipped product.
                 </p>
@@ -137,13 +137,13 @@
 
           <div class="story-media">
             <figure class="media-card">
-              <img src="assets/executionos-mvp.png" alt="Early ExecutionOS MVP plan screen">
+              <img class="expandable-image" src="assets/executionos-mvp.png" alt="Early ExecutionOS MVP plan screen">
               <figcaption>Early MVP — functional, local, and intentionally simple.</figcaption>
             </figure>
 
             <figure class="media-card">
-              <img src="assets/figma-overview.png" alt="ExecutionOS Figma file showing product screens and states">
-              <figcaption>Figma overview — auth, plan, focus, review, and dashboard states.</figcaption>
+              <img class="expandable-image" src="assets/figma-overview.png" alt="ExecutionOS Figma file showing product screens and states">
+              <figcaption>Figma overview — auth, plan, focus, review, and dashboard screens.</figcaption>
             </figure>
           </div>
         </div>
@@ -154,16 +154,25 @@
             <h3>v0.1 — Core MVP</h3>
             <p>Plan → Focus → Review.</p>
           </article>
+
+          <div class="timeline-arrow" aria-hidden="true">↓</div>
+
           <article>
             <span>Jul 2</span>
             <h3>v0.2 — Persistence & Dashboard</h3>
             <p>Added backend persistence and visibility into completed work.</p>
           </article>
+
+          <div class="timeline-arrow" aria-hidden="true">↓</div>
+
           <article>
             <span>Aug 25</span>
             <h3>v0.3 — Multi-user Product</h3>
             <p>Accounts, user-owned sessions, deletion, and completed core UI.</p>
           </article>
+          
+          <div class="timeline-arrow" aria-hidden="true">↓</div>
+          
           <article>
             <span>Sep 13</span>
             <h3>v0.4 — Polished UI & UX</h3>
@@ -187,29 +196,28 @@
         </div>
         <p class="stack">JWT authentication · SQLAlchemy · Netlify · Render</p>
 
-        <div class="eyebrow">Decisions</div>
+        <h3 class="decisions-title">Decisions</h3>
 
         <div class="cards">
           <article class="card">
             <h3>JSON → SQL</h3>
             <p>
-              Local persistence was enough at first, but supporting multiple users changed the requirements.
-              I moved the product to a database-backed model.
+              Local persistence was enough at first, but to support multiple users, I moved the product to having a database.
             </p>
           </article>
 
           <article class="card">
             <h3>External database</h3>
             <p>
-              Render's filesystem could not be trusted for persistent production data across redeploys, so I
-              separated persistence from the backend deployment.
+              Render's filesystem was going to reset the database content on redeploys. To avoid losing data, I
+              decided to separate it from the backend deployment.
             </p>
           </article>
 
           <article class="card">
             <h3>Access + refresh tokens</h3>
             <p>
-              I chose a short-lived access token plus a long-lived refresh token. The access token stays in
+              I chose a short lived access token plus a long lived refresh token. The access token stays in
               memory, the refresh token lives in an HttpOnly cookie, and the client refreshes access
               transparently when needed. A token-version field prevents future refreshes after logout.
             </p>
@@ -224,8 +232,8 @@
               <div>
                 <h4>Authorization from verified identity</h4>
                 <p>
-                  I identified that trusting a client-provided <code>user_id</code> would let a client request
-                  another user's data. I moved identity into verified JWT claims instead.
+                  I identified that trusting a <code>user_id</code> provided by a client would let them request
+                  another user's data. Then decided to move identity into verified JWT claims instead.
                 </p>
               </div>
             </article>
@@ -248,31 +256,28 @@
       <section id="product-thinking" class="section">
         <div class="section-heading">
           <div class="eyebrow">Product Thinking</div>
-          <h2>Decisions behind the product.</h2>
+          <h2 class="product-decisions-header">Decisions behind the product.</h2>
         </div>
 
         <div class="cards">
           <article class="card">
-            <div class="card-label">Flow</div>
             <h3>Plan → Focus → Review</h3>
             <p>
               I chose this flow instead of a timer ↔ dashboard loop because each screen should have one clear
-              purpose. The user should always know what they are supposed to do next.
+              purpose. The user should always know what they are supposed to do now.
             </p>
           </article>
 
           <article class="card">
-            <div class="card-label">Accountability</div>
-            <h3>Recorded time stays immutable</h3>
+            <h3>Finished sessions' time stays immutable</h3>
             <p>
-              Users should not be able to modify completed work time after a session finishes. The constraint
-              protects the accountability of the record.
+              Users shouldn't be able to modify the time of a finished session. The restriction
+              protects their accountability with themselves.
             </p>
           </article>
 
           <article class="card">
-            <div class="card-label">Execution</div>
-            <h3>Target time before actual time</h3>
+            <h3>Define target time before starting</h3>
             <p>
               The user defines intended work before starting. Planning happens first, so the focus session can
               be about execution instead of repeatedly deciding what to do.
@@ -307,9 +312,32 @@
       </section>
     </main>
 
+    <div class="lightbox" id="lightbox" aria-hidden="true">
+      <button class="lightbox-close" aria-label="Close image">
+        <svg
+          viewBox="0 0 24 24"
+          width="24"
+          height="24"
+          aria-hidden="true"
+        >
+          <path
+            d="M18 6 6 18M6 6l12 12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+          />
+        </svg>
+      </button>
+      <img class="lightbox-image" src="" alt="">
+    </div>
+
     <footer>
       <span>Duvan Verdun</span>
-      <span>Make getting better the default.</span>
+      <span>Building products that help people improve their lives.</span>
     </footer>
+
+    <script src="app.js"></script>
+  
   </body>
 </html>
