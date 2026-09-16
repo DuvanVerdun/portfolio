@@ -567,10 +567,16 @@ footer {
 }
 
 @media (max-width: 620px) {
-  .site-header,
   .section,
   footer {
     width: min(calc(100% - 28px), var(--max));
+  }
+
+  .site-header {
+    width: 100%;
+    padding-left: 14px;
+    padding-right: 14px;
+    box-sizing: border-box;
   }
 
   .hero {
