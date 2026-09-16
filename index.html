@@ -39,7 +39,7 @@
           <h2>ExecutionOS</h2>
           <p>
             Helps people be consistent with deep work by making execution visible and rewarding.
-            I built it end to end to solve my own problem: inconsistency with execution over defined plans.
+            I built it end to end to solve my own struggle with consistently executing on my plans.
           </p>
         </div>
 
@@ -59,25 +59,16 @@
         </div>
 
         <div class="media-grid">
-          <figure class="media-card wide">
-            <div class="placeholder video-placeholder">
-              <div>
-                <span class="placeholder-label">Demo video</span>
-                <strong>Plan → Focus → Review → Dashboard</strong>
-                <small>Replace this block with the final video.</small>
-              </div>
-            </div>
+          <figure class="media-card">
+            <video class="demo-video" controls preload="metadata" playsinline>
+              <source src="assets/demo-video.mp4" type="video/mp4">
+              Your browser does not support HTML video.
+            </video>
             <figcaption>Full ExecutionOS flow.</figcaption>
           </figure>
 
           <figure class="media-card">
-            <div class="placeholder dashboard-placeholder">
-              <div>
-                <span class="placeholder-label">Dashboard screenshot</span>
-                <strong>Real usage data</strong>
-                <small>Replace once the current sessions are complete.</small>
-              </div>
-            </div>
+            <img class="expandable-image" src="assets/dashboard-screenshot.png" alt="ExecutionOS dashboard showing weekly stats and completed sessions">
             <figcaption>Current product dashboard.</figcaption>
           </figure>
         </div>
@@ -86,7 +77,7 @@
       <section id="build" class="section">
         <div class="section-heading">
           <div class="eyebrow">How I built it</div>
-          <h2>Learning only when the product required it.</h2>
+          <h2>Learning when the product required it.</h2>
           <p>
             The idea was to build a product that tracks deep work time and makes consistency visible in a
             way that rewards the user for continuing. It also became a way for me to learn how to build
@@ -202,14 +193,14 @@
           <article class="card">
             <h3>JSON → SQL</h3>
             <p>
-              Local persistence was enough at first, but to support multiple users, I moved the product to having a database.
+              Local persistence was enough at first, but to support multiple users, I replaced the local JSON storage with a SQL database.
             </p>
           </article>
 
           <article class="card">
             <h3>External database</h3>
             <p>
-              Render's filesystem was going to reset the database content on redeploys. To avoid losing data, I
+              Render's local filesystem was going to reset the database content on redeploys. To avoid losing data, I
               decided to separate it from the backend deployment.
             </p>
           </article>
@@ -217,7 +208,7 @@
           <article class="card">
             <h3>Access + refresh tokens</h3>
             <p>
-              I chose a short lived access token plus a long lived refresh token. The access token stays in
+              I chose a short-lived access token plus a long-lived refresh token. The access token stays in
               memory, the refresh token lives in an HttpOnly cookie, and the client refreshes access
               transparently when needed. A token-version field prevents future refreshes after logout.
             </p>
@@ -233,7 +224,7 @@
                 <h4>Authorization from verified identity</h4>
                 <p>
                   I identified that trusting a <code>user_id</code> provided by a client would let them request
-                  another user's data. Then decided to move identity into verified JWT claims instead.
+                  another user's data. I then moved identity into verified JWT claims instead.
                 </p>
               </div>
             </article>
@@ -241,11 +232,10 @@
             <article>
               <span>02</span>
               <div>
-                <h4>Designing persistent authentication</h4>
+                <h4>Keeping timer accurate outside the tab</h4>
                 <p>
-                  I had to combine short-lived access tokens with persistent login, decide where each token
-                  should live, handle cross-origin cookies, refresh and retry failed requests automatically,
-                  and make logout invalidate future refreshes.
+                  The timer stopped counting reliably when the tab was inactive. I moved from incrementing seconds to 
+                  calculating elapsed time from timestamps, while separately tracking and subtracting paused time.
                 </p>
               </div>
             </article>
@@ -263,16 +253,16 @@
           <article class="card">
             <h3>Plan → Focus → Review</h3>
             <p>
-              I chose this flow instead of a timer ↔ dashboard loop because each screen should have one clear
-              purpose. The user should always know what they are supposed to do now.
+              I intentionally kept the core flow minimal instead of using a timer ↔ dashboard loop. Each screen has one clear
+              purpose so the user has fewer distractions and always know what to do now.
             </p>
           </article>
 
           <article class="card">
-            <h3>Finished sessions' time stays immutable</h3>
+            <h3>Finished session time is immutable</h3>
             <p>
               Users shouldn't be able to modify the time of a finished session. The restriction
-              protects their accountability with themselves.
+              protects their accountability to themselves.
             </p>
           </article>
 
@@ -292,10 +282,10 @@
           <h2>I like building around problems I understand personally.</h2>
         </div>
         <p class="about-copy">
-          I’m deeply interested in self improvement, fitness, and building products that help people grow.
+          I’m deeply interested in self improvement, fitness, and technology.
           I worked at a gym for months to buy the computer I now use to build ExecutionOS, a product born
-          from my own struggle with consistency. I want to help people get better and grow every day by first
-          doing it myself.
+          from my own struggle with consistency. I love pushing myself to learn and grow, then using that 
+          to build things that help other people grow too.
         </p>
       </section>
 
